@@ -14,7 +14,7 @@ public class RacingLineArchitecture {
                 memo[i][j] = 10000000;
             }
         }
-        int[] next = new int[4];
+        int[] next;
 
         Deque<int[]> deque = new ArrayDeque<>();
         deque.add(new int[]{0, 0, 0, 1}); // x, y, money, state: 0 세로, 1 가로
