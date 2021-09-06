@@ -46,7 +46,12 @@ public class BoxerSort {
                     }
                 }
             }
-            rate = win / rateCnt;
+            if (win == 0) {
+                rate = 0;
+            } else {
+                rate = win / rateCnt;
+            }
+            System.out.println(rate);
             Boxer boxer = new Boxer(i+1, weights[i], win, cnt, rate);
             boxers[i] = boxer;
         }
@@ -64,7 +69,13 @@ public class BoxerSort {
                     } else if (o1.bigwin < o2.bigwin) {
                         return 1;
                     } else {
-                        return o1.number - o2.number;
+                        if (o1.weight > o2.weight) {
+                            return -1;
+                        } else if (o1.weight < o2.weight) {
+                            return 1;
+                        } else {
+                            return o1.number - o2.number;
+                        }
                     }
                 }
             }
