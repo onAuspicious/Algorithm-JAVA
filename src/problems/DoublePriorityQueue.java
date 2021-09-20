@@ -3,12 +3,13 @@ package problems;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
 public class DoublePriorityQueue {
 
-    static PriorityQueue<Integer> max = new PriorityQueue<>();
+    static PriorityQueue<Integer> max = new PriorityQueue<>(Collections.reverseOrder());
     static PriorityQueue<Integer> min = new PriorityQueue<>();
     static HashMap<Integer, Integer> removedFromMax = new HashMap<>();
     static HashMap<Integer, Integer> removedFromMin = new HashMap<>();
@@ -24,23 +25,15 @@ public class DoublePriorityQueue {
             now = Integer.parseInt(split[1]);
             if (split[0].equals("I")) {
                 min.add(now);
-                max.add(-now);
+                max.add(now);
             } else {
                 //remove from min
                 if (now == -1 && !min.isEmpty()) {
                     poll = min.poll();
-                    if (removedFromMin.containsKey(poll)) {
-                        removedFromMin.replace(poll, removedFromMin.get(poll) + 1);
-                    } else {
-                        removedFromMin.put(poll, 1);
-                    }
+                    removedFromMin.put(poll, removedFromMin.getOrDefault(poll, 0) + 1);
                 } else if (now == 1 && !max.isEmpty()) { //remove from max
-                    poll = -max.poll();
-                    if (removedFromMax.containsKey(poll)) {
-                        removedFromMax.replace(poll, removedFromMax.get(poll) + 1);
-                    } else {
-                        removedFromMax.put(poll, 1);
-                    }
+                    poll = max.poll();
+                    removedFromMax.put(poll, removedFromMax.getOrDefault(poll, 0) + 1);
                 }
                 while (!min.isEmpty() && removedFromMax.containsKey(min.peek())) {
                     poll = min.poll();
@@ -50,8 +43,8 @@ public class DoublePriorityQueue {
                         removedFromMax.replace(poll, removedFromMax.get(poll) - 1);
                     }
                 }
-                while (!max.isEmpty() && removedFromMin.containsKey(-max.peek())) {
-                    poll = -max.poll();
+                while (!max.isEmpty() && removedFromMin.containsKey(max.peek())) {
+                    poll = max.poll();
                     if (removedFromMin.get(poll) == 1) {
                         removedFromMin.remove(poll);
                     } else {
@@ -61,7 +54,7 @@ public class DoublePriorityQueue {
             }
         }
         if (!max.isEmpty() && !min.isEmpty()) {
-            sb.append(-max.peek()).append(' ').append(min.peek()).append('\n');
+            sb.append(max.peek()).append(' ').append(min.peek()).append('\n');
         } else {
             sb.append("EMPTY").append('\n');
         }
@@ -81,3 +74,5 @@ public class DoublePriorityQueue {
         System.out.println(sb);
     }
 }
+
+
