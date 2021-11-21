@@ -34,6 +34,8 @@ public class Hacking {
         System.out.println(sb);
     }
 
+    // Dijkstra Algorithm 으로 시작 노드에서 갈 수 있는 모든 의존된 노드들을 최단거리 탐색합니다.
+    // 주의! 의존성 관계가 순서대로가 아닌 역순으로 입력됩니다.
     public static void hacking(int n, int d, int c) throws IOException {
         PriorityQueue<Move> hacked = new PriorityQueue<>();
         int[] times = new int[n + 1];
@@ -72,6 +74,7 @@ public class Hacking {
         sb.append(result[0]).append(' ').append(result[1]).append('\n');
     }
 
+    // arr 내부의 MAX_VALUE를 제외한 가장 큰 값을 찾고, 카운트한 값을 반환합니다.
     public static int[] findMaxNumberAndCnt(int[] arr) {
         int result = 0;
         int cnt = 0;
