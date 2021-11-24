@@ -39,7 +39,7 @@ public class BugOnTree {
 
         // start from 1
         StringBuilder sb = new StringBuilder();
-        int[] maxNode = maximumFruits(3);
+        int[] maxNode = maximumFruits(1);
         int[] result = maximumFruits(maxNode[1]);
         sb.append(result[0]).append(' ').append(Math.min(maxNode[1], result[1]));
         System.out.println(sb);
