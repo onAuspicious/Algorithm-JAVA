@@ -40,18 +40,16 @@ public class CircularClass {
             while (cur < n && info[cur].day <= day) {
                 if (pq.size() < day) {
                     pq.offer(info[cur]);
+                    benefit += info[cur].pay;
                 } else {
                     if (pq.peek().pay < info[cur].pay) {
-                        pq.poll();
+                        benefit -= pq.poll().pay;
                         pq.offer(info[cur]);
+                        benefit += info[cur].pay;
                     }
                 }
                 cur++;
             }
-        }
-
-        while (!pq.isEmpty()) {
-            benefit += pq.poll().pay;
         }
 
         System.out.println(benefit);
