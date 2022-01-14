@@ -16,12 +16,23 @@ public class BowContest {
     }
 
     public void DFS(int level, int[] info, int[] player, int n) {
-        if (n == 0 || level == 11) {
+        if (level == 11) {
+            player[10] += n;
             int diff = getDiff(info, player);
-            if (diff >= maxPoint) {
+            if (diff > maxPoint) {
                 maxPoint = diff;
                 System.arraycopy(player, 0, result, 0, 11);
+            } else if (diff == maxPoint) {
+                for (int i = 10; i >= 0; i--) {
+                    if (player[i] == result[i]) continue;
+
+                    if (player[i] > result[i]) {
+                        System.arraycopy(player, 0, result, 0, 11);
+                    }
+                    break;
+                }
             }
+            player[10] = 0;
             return;
         }
 
@@ -37,6 +48,7 @@ public class BowContest {
     public int getDiff(int[] info, int[] player) {
         int dif = 0;
         for (int i = 0; i <= 10; i++) {
+            if (player[i] == 0 && info[i] == 0) continue;
             if (player[i] > info[i]) {
                 dif += 10 - i;
             } else {
