@@ -14,14 +14,7 @@ public class ScaffoldingDisappear {
 
         DFS(board, aloc[0], aloc[1], bloc[0], bloc[1], 0, 1);
 
-        if (result[0] == Integer.MAX_VALUE) {
-            return result[1];
-        } else if (result[1] == Integer.MAX_VALUE) {
-            return result[0];
-        } else {
-            System.out.println(result[0] + " " + result[1]);
-            return Math.max(result[0], result[1]);
-        }
+        return Math.max(result[0], result[1]);
     }
 
     public void DFS(int[][] board, int nowX, int nowY, int nextX, int nextY, int move, int player) {
