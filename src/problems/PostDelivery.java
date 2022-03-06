@@ -1,5 +1,6 @@
 package problems;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +11,7 @@ import java.util.PriorityQueue;
 public class PostDelivery {
 
     static int n, m;
-    static ArrayList<Node>[] tree;
+    static ArrayList<Node>[] graph;
 
     static class Node implements Comparable<Node>{
         int dest;
@@ -33,10 +34,10 @@ public class PostDelivery {
         n = Integer.parseInt(input[0]);
         m = Integer.parseInt(input[1]);
 
-        tree = new ArrayList[n + 1];
+        graph = new ArrayList[n + 1];
 
         for (int i = 0; i < n + 1; i++) {
-            tree[i] = new ArrayList<>();
+            graph[i] = new ArrayList<>();
         }
 
         for (int i = 0; i < m; i++) {
@@ -44,8 +45,8 @@ public class PostDelivery {
             int a = Integer.parseInt(input[0]);
             int b = Integer.parseInt(input[1]);
             int dist = Integer.parseInt(input[2]);
-            tree[a].add(new Node(b, dist));
-            tree[b].add(new Node(a, dist));
+            graph[a].add(new Node(b, dist));
+            graph[b].add(new Node(a, dist));
         }
 
         PriorityQueue<Node> pq = new PriorityQueue<>();
@@ -61,7 +62,7 @@ public class PostDelivery {
             }
             distances[now.dest] = now.dist;
 
-            for (Node node : tree[now.dest]) {
+            for (Node node : graph[now.dest]) {
                 if (distances[node.dest] > distances[now.dest] + node.dist) {
                     pq.offer(new Node(node.dest, distances[now.dest] + node.dist));
                 }
