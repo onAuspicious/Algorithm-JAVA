@@ -10,7 +10,7 @@ class FruitsMan {
 
         while (m + now <= score.size) {
             var min = 10
-            for (i in now..<now + m) {
+            for (i in now..now + m) {
                 min = min(min, score[i])
             }
             result += min * m
